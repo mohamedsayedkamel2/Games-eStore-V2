@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: html_head" />
+<body>
+<head th:replace="fragments :: menu" />
+<form th:action="@{/videogames/buy}" method="post" style="max-width: 700px; margin: 0 auto">
+    <input th:field="${videogame.id}" name="id" hidden>
+    <div class="border border-secondary rounded p-3">
+    <label class="col-sm-4 col-form-Label">Game name</label>
+                <p>[[${videogame.gameName}]]</p>
+
+            <label class="col-sm-4 col-form-Label">Game price</label>
+                <p>[[${videogame.price}]]</p>
+
+        <label class="col-sm-4 col-form-Label">Your balance: [[${#authentication.getPrincipal().getCustomer().getBalance()}]]</label>
+
+
+        <th:block th:each="paymentMethod : ${paymentMethods}">
+            <input type="radio" class="m-2" name="paymentMethod" th:value="${paymentMethod}"/>
+            - <small>[[${paymentMethod}]]</small>
+            <br/>
+        </th:block>
+
+
+    <button type="submit" class="btn btn-dark">Buy</button>
+    </div>
+</form>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#logoutLink").on("click", function(e){
+            e.preventDefault();
+            document.LogoutForm.submit();
+        });
+    });
+</script>
+</body>
+</html>

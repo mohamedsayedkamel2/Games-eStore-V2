@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: html_head" />
+<body>
+<head th:replace="fragments :: menu" />
+    <div class="container-sm alert alert-primary text-center">Click on the platform of the video game you want to buy</div>
+<div style="text-align: center;">
+ <br><br>
+    <a href="#" th:href="@{/videogames/ps4}">
+ <img th:src="@{/images/ps4.webp}" class="img-fluid mx-auto" title="Playstation 4" /></a> &nbsp;
+    <a href="#" th:href="@{/videogames/ps5}">
+<img th:src="@{/images/ps5.webp}" class="img-fluid mx-auto" title="Playstation 5" /></a> &nbsp;
+    <a href="#" th:href="@{/videogames/pc}">
+<img th:src="@{/images/pc.webp}" class="img-fluid mx-auto" title="PC" /></a>&nbsp;
+    <a href="#" th:href="@{/videogames/}">
+<img th:src="@{/images/ALL.png}" class="img-fluid mx-auto" title="All platforms" /></a>&nbsp;
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#logoutLink").on("click", function(e){
+            e.preventDefault();
+            document.LogoutForm.submit();
+        });
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: html_head" />
+<body>
+<head th:replace="fragments :: menu" />
+<div th:if="${ordersList == null}" class="alert alert-success text-center">You don't have any games, go and buy some games!</div>
+<div th:if="${message != null}" class="alert alert-success text-center">[[${message}]]</div>
+<table class="table table-striped">
+  <tr>
+    <th>Transaction ID</th>
+    <th>Game name</th>
+    <th>Price</th>
+    <th>Purchase Date</th>
+  </tr>
+  <tr th:each="order : ${ordersList}">
+    <td>[[${order.orderTransaction}]]</td>
+    <td>[[${order.videogame.gameName}]]</td>
+    <td>[[${order.videogame.price}]]</td>
+    <td>[[${order.purchaseDate}]]</td>
+  </tr>
+</table>
+</form>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#logoutLink").on("click", function(e){
+            e.preventDefault();
+            document.LogoutForm.submit();
+        });
+    });
+</script>
+</body>
+</html>

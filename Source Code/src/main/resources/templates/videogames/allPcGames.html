@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: html_head" />
+<body>
+<head th:replace="fragments :: menu" />
+<table class="table table-striped">
+    <tr>
+        <th>Game Name</th>
+        <th>Platform</th>
+        <th>Price</th>
+        <th>Release Date</th>
+        <th>Developer</th>
+        <th>Publisher</th>
+        <th sec:authorize="hasAuthority('USER')">Buy link</th>
+    </tr>
+    <tr th:each="videogame : ${videogames}">
+        <td th:text="${videogame.gameName}"></td>
+        <td th:text="${videogame.platform.name}"></td>
+        <td th:text="${videogame.price}"></td>
+        <td th:text="${videogame.releaseDate}"></td>
+        <td th:text="${videogame.developer}"></td>
+        <td th:text="${videogame.publisher}"></td>
+        <td sec:authorize="hasAuthority('USER')"><a href="#" th:href="@{/videogames/buy/{id}(id=${videogame.id})}">Buy</a></td>
+        </block>
+    </tr>
+</table>
+<div th:replace="fragments :: game-page" />
+</form>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#logoutLink").on("click", function(e){
+            e.preventDefault();
+            document.LogoutForm.submit();
+        });
+    });
+</script>
+</body>
+</html>

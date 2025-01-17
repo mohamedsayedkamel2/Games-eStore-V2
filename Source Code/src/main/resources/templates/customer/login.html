@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: html_head" />
+<body>
+<div class="container-fluid text-center">
+    <div>
+        <div>
+            <h1>EpicGamerStore</h1>
+        </div>
+    </div>
+<div th:if="${message}">[[${message}]]</div>
+    <div th:if="${param.error}">
+        <p class="text-danger">[[${session.SPRING_SECURITY_LAST_EXCEPTION.message}]]</p>
+    </div>
+    <div th:if="${param.logout}">
+        <p class="text-warning">You have logged out</p>
+    </div>
+<form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto" autocomplete="off">
+    <div class="border border-secondary rounded p-3">
+    <p>Login Page</p>
+   <input type="email" name="username" placeholder="Email" required><br>
+    <input type="password" name="password" placeholder="password" required><br>
+    Remember me:  <input type="checkbox" name="remember-me"><br>
+    <input type="submit" value="Login" class="btn btn-primary">
+    </div>
+</form>
+<a th:href="@{/forgot_password}">Forgot your password?</a><br>
+<a th:href="@{/customer/register}">Register</a><br>
+</div>
+</body>
+</html>
+

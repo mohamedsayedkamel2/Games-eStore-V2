@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: html_head" />
+<body>
+<head th:replace="fragments :: menu" />
+    <div>
+        <h2>Manage Users | Create new User</h2>
+    </div>
+
+    <div>
+        <form th:action="@{/admin/games/add}" th:object="${videogame}" method="post"
+              style="max-width: 700px; margin: 0 auto" onsubmit="return checkEmailUnique(this)">
+            <div class="border border-secondary rounded p-3">
+                <div class="form-group-row">
+                    <label class="col-sm-4 col-form-Label">Game Name</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" th:field="*{gameName}" required />
+                    </div>
+                </div>
+                <div class="form-group-row">
+                    <label class="col-sm-4 col-form-Label">Roles</label>
+                    <div class="col-sm-8">
+                        <th:block th:each="platform : ${platforms}">
+                            <input type="radio" class="m-2" th:field="*{platform}" th:text="${platform.name}" th:value="${platform}"/>
+                            <br/>
+                        </th:block>
+                    </div>
+                </div>
+                <div class="form-group-row">
+                    <label class="col-sm-4 col-form-Label">Price</label>
+                    <div class="col-sm-8">
+                        <input class="form-control" th:field="*{price}" required />
+                    </div>
+                </div>
+                <div class="form-group-row">
+                    <label class="col-sm-4 col-form-Label">Release Date</label>
+                    <div class="col-sm-8">
+                        <input type="date" class="form-control" th:field="*{releaseDate}" required />
+                    </div>
+                </div>
+                <div class="form-group-row">
+                    <label class="col-sm-4 col-form-Label">Publisher</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" th:field="*{publisher}" required />
+                    </div>
+                </div>
+                <div class="form-group-row">
+                    <label class="col-sm-4 col-form-Label">Developer</label>
+                    <div class="col-sm-8">
+                        <input type="text" class="form-control" th:field="*{developer}" required />
+                    </div>
+                </div>
+                <div class="text-center">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                    <input type="button" value="Cancel" class="btn btn-secondary" id="buttonCancel"/>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="text-center">
+        <p>Gaming4all - Copyright &copy;</p>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    $(document).ready(function()
+    {
+        $("#buttonCancel").on("click", function()
+        {
+            window.location = "[[@{/admin/games}]]";
+        });
+    });
+    $(document).ready(function(){
+        $("#logoutLink").on("click", function(e){
+            e.preventDefault();
+            document.LogoutForm.submit();
+        });
+    });
+</script>
+</html>

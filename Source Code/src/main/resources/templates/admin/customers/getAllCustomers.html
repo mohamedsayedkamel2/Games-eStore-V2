@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: html_head" />
+<style>
+a:link {
+  text-decoration: none;
+}
+</style>
+<body>
+<head th:replace="fragments :: menu" />
+  <div class="text-center">
+    <h2>Manage Users</h2>
+    <a th:href="@{/admin/customers/add}" class="fa fa-user-plus fa-2x" style="color:black;"></a>
+  </div>
+
+  <div th:if="${message != null}" class="alert alert-success text-center">[[${message}]]</div>
+
+  <div>
+    <table class="table table-bordered table-striped table-hover table-responsive-xl ">
+      <thead class="table-dark">
+      <tr>
+        <th>User ID</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Roles</th>
+        <th>Enabled</th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="customer : ${listCustomers}">
+        <td>[[${customer.id}]]</td>
+        <td>[[${customer.firstName}]]</td>
+        <td>[[${customer.lastName}]]</td>
+        <td>[[${customer.roles}]]</td>
+        <td>
+          <a th:if="${customer.enabled == true}" class="fa fa-check-circle fa-2x"
+                style="color:green;" title="Disable this user" th:href="@{'/admin/customers/changeEnable/' + ${customer.id} + '/enabled/false'}"></a>
+          <a th:if="${customer.enabled == false}" title="Enable this user" class="fa fa-times-circle-o fa-2x"
+             href="#" th:href="@{'/admin/customers/changeEnable/' + ${customer.id} + '/enabled/true'}" style="color:red;"></a>
+
+        <td><a class="fa fa-edit fa-2x" th:href="@{'/admin/customers/update/' + ${customer.id}}" href="#"></a></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+<div class="text-center m-1" th:if="${totalItems > 0}">
+  <nav>
+    <ul class="pagination justify-content-center">
+      <li class="page-item"><a class="page-link" th:href="@{/admin/games/1}">First</a></li>
+      <li class="page-item"><a class="page-link" th:href="@{'/admin/games/' + ${currentPage - 1}}" th:if="${currentPage != 1}">Previous</a></li>
+      <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}"><a class="page-link" th:href="@{'/admin/games/' + ${i}}">[[${i}]]</a></li>
+      <li class="page-item"><a class="page-link" th:href="@{'/admin/games/' + ${currentPage + 1}}" th:if="${currentPage != totalPages}">Next</a></li>
+      <li class="page-item"><a class="page-link" th:href="@{'/admin/games/' + ${totalPages}}">Last</a></li>
+    </ul>
+  </nav>
+  Page [[${currentPage}]] of [[${totalPages}]]<br>
+</div>
+  <div class="text-center">
+    <p>Gaming4all - Copyright &copy;</p>
+  </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#logoutLink").on("click", function(e){
+            e.preventDefault();
+            document.LogoutForm.submit();
+        });
+    });
+</script>
+</body>
+</html>

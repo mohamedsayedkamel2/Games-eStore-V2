@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity5">
+<head th:replace="fragments :: html_head" />
+<style>
+a:link {
+  text-decoration: none;
+}
+</style>
+<body>
+<head th:replace="fragments :: menu" />
+<div class="text-center">
+    <h2>Manage All Games</h2>
+    <a th:href="@{/admin/games/add}" class="text-primary">Add a new Game</a>
+</div>
+<table class="table table-striped">
+    <tr>
+        <th>Game Name</th>
+        <th>Platform</th>
+        <th>Price</th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr th:each="videogame : ${videogames}">
+        <td th:text="${videogame.gameName}"></td>
+        <td th:text="${videogame.platform.name}"></td>
+        <td th:text="${videogame.price}"></td>
+        <td><a th:href="@{/admin/games/edit/{id}(id=${videogame.id})}" class="text-primary">Edit</a></td>
+        <td><a th:href="@{/admin/games/delete/{id}(id=${videogame.id})}" class="text-danger">Delete</a></td>
+        </block>
+    </tr>
+</table>
+<div class="text-center m-1" th:if="${totalItems > 0}">
+    <nav>
+        <ul class="pagination justify-content-center">
+            <li class="page-item"><a class="page-link" th:href="@{/admin/games/1}">First</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{'/admin/games/' + ${currentPage - 1}}" th:if="${currentPage != 1}">Previous</a></li>
+            <li class="page-item" th:each="i : ${#numbers.sequence(1, totalPages)}"><a class="page-link" th:href="@{'/admin/games/' + ${i}}">[[${i}]]</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{'/admin/games/' + ${currentPage + 1}}" th:if="${currentPage != totalPages}">Next</a></li>
+            <li class="page-item"><a class="page-link" th:href="@{'/admin/games/' + ${totalPages}}">Last</a></li>
+        </ul>
+    </nav>
+Page [[${currentPage}]] of [[${totalPages}]]<br>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#logoutLink").on("click", function(e){
+            e.preventDefault();
+            document.LogoutForm.submit();
+        });
+    });
+</script>
+</body>
+</html>
