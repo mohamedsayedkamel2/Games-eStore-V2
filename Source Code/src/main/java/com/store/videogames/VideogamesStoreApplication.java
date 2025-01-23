@@ -11,7 +11,8 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @EnableCaching
 @EnableAsync
-@ComponentScan(basePackages = {"com.store.videogames.repository.entites", "com.store.videogames", "com.store.videogames.service", "com.store.videogames.repository"})
+//@ComponentScan(basePackages = {"com.store.videogames.repository.entites", "com.store.videogames", "com.store.videogames.service", "com.store.videogames.repository"})
+//@ComponentScan(basePackages = "com.store.videogames.security.config")
 public class VideogamesStoreApplication
 {
 	public static void main(String[] args)

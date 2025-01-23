@@ -2,9 +2,10 @@ package com.store.videogames.controller.customer;
 
 import com.store.videogames.service.customer.account.CustomerEmailService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
+@Controller
 public class CustomerProfileVerification
 {
     private final CustomerEmailService customerEmailService;
