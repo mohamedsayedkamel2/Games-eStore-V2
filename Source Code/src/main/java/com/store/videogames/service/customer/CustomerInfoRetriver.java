@@ -63,59 +63,9 @@ public class CustomerInfoRetriver
         return customerRepository.getCustomerByEmail(email);
     }
 
-    public Customer getCustomerByUsername(String username)
-    {
-        return customerRepository.getCustomerByUsername(username);
-    }
-
-    public List<Customer> getCustomersByCountryName(String countryName)
-    {
-        return customerRepository.getCustomerByCountryName(countryName);
-    }
-
-    public List<Customer> getCustomersByCityName(String cityName)
-    {
-        return customerRepository.getCustomerByCityName(cityName);
-    }
-
-    public List<Customer> getCustomersByStreetName(String streetName)
-    {
-        return customerRepository.getCustomerByStreetName(streetName);
-    }
-
-    public List<Customer> getCustomersByZipCode(int zipCode)
-    {
-        return customerRepository.getCustomerByZipCode(zipCode);
-    }
-
-    public List<Customer> getCustomersByRegistrationDate(LocalDate registrationDate)
-    {
-        return customerRepository.getCustomerByRegistrationDate(registrationDate);
-    }
-
-    public List<Customer> getCustomersByRegistrationTime(LocalTime registrationTime)
-    {
-        return customerRepository.getCustomerByRegistrationTime(registrationTime);
-    }
-
-    public List<Customer> getCustomersByEnabled(Boolean isEnabled)
-    {
-        return customerRepository.getCustomerByEnabled(isEnabled);
-    }
-
-    public Customer getByEmailVerificationCode(String EmailVerificationCode)
-    {
-        return customerRepository.getCustomerByEmailVerificationCode(EmailVerificationCode);
-    }
-
     public Customer getCustomerByResetPasswordToken(String token)
     {
         return customerRepository.getCustomerByResetPasswordToken(token);
-    }
-
-    public CustomerMoneyHistory getMoneyHistoryByOrder(Order order)
-    {
-        return customerMoneyHistoryRepository.getCustomerMoneyHistoryByOrder(order);
     }
 
     @Cacheable("Customer")
@@ -123,6 +73,5 @@ public class CustomerInfoRetriver
     {
         return customerRepository.findAll();
     }
-
 
 }
